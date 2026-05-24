@@ -1,0 +1,506 @@
+# Pytest HTML Report with Collapsible Banners
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pytest Execution Report</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        .summary {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .test-case {
+            background: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .test-header {
+            background: #2f5597;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .collapsible-banner {
+            margin: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #f0d58a;
+        }
+
+        .banner-header {
+            background: #fff8dc;
+            border-left: 5px solid #f0ad4e;
+            padding: 12px;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .banner-header:hover {
+            background: #fff2b3;
+        }
+
+        .banner-content {
+            display: none;
+            background: #ffffff;
+            border-top: 1px solid #eee;
+        }
+
+        .banner-content.active {
+            display: block;
+        }
+
+        .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+
+        .log-entry {
+            font-family: Consolas, monospace;
+            padding: 5px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .INFO {
+            color: #005cbf;
+        }
+
+        .DEBUG {
+            color: #666;
+        }
+
+        .WARNING {
+            color: #c77c02;
+        }
+
+        .ERROR {
+            color: #c82333;
+        }
+
+        .STEP {
+            color: #218838;
+            font-weight: bold;
+        }
+
+        .CHECKPOINT {
+            color: purple;
+            font-weight: bold;
+        }
+
+        .FAIL {
+            background: #ffe5e5;
+        }
+
+        .PASS {
+            background: #e5ffe5;
+        }
+
+        .traceback {
+            background: #222;
+            color: #ddd;
+            padding: 10px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .metadata {
+            margin: 10px;
+            font-size: 0.9em;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Pytest HTML Report</h1>
+
+    <div class="summary">
+        <h2>Execution Summary</h2>
+
+        <table>
+            <tr>
+                <th>Suite</th>
+                <td>Regression Suite</td>
+            </tr>
+            <tr>
+                <th>Execution Time</th>
+                <td>00:01:22</td>
+            </tr>
+            <tr>
+                <th>Total Tests</th>
+                <td>2</td>
+            </tr>
+            <tr>
+                <th>Passed</th>
+                <td>1</td>
+            </tr>
+            <tr>
+                <th>Failed</th>
+                <td>1</td>
+            </tr>
+            <tr>
+                <th>Environment</th>
+                <td>Python 3.12 / Windows 11</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <!-- TEST 1 -->
+
+    <div class="test-case PASS">
+
+        <div class="test-header">
+            TEST PASSED :: test_login_valid_user
+        </div>
+
+        <div class="metadata">
+            Module: tests.authentication.test_login<br>
+            Class: TestLogin<br>
+            Function: test_login_valid_user<br>
+            Start Time: 2026-05-24 10:00:01
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=1 | MODULE=AUTHENTICATION | ACTION=OPEN_LOGIN_PAGE | USER=test_user</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="log-entry DEBUG">
+                    10:00:01.102 | DEBUG |
+                    pytest_runtest_setup started
+                </div>
+
+                <div class="log-entry INFO">
+                    10:00:01.210 | INFO |
+                    Browser launched successfully
+                </div>
+
+                <div class="log-entry STEP">
+                    10:00:02.001 | STEP |
+                    Navigate to Login Page
+                </div>
+
+                <div class="log-entry INFO">
+                    10:00:02.400 | INFO |
+                    Page title verified
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=2 | MODULE=AUTHENTICATION | ACTION=ENTER_CREDENTIALS | USER=test_user</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="log-entry STEP">
+                    10:00:03.001 | STEP |
+                    Entering username
+                </div>
+
+                <div class="log-entry STEP">
+                    10:00:03.400 | STEP |
+                    Entering password
+                </div>
+
+                <div class="log-entry CHECKPOINT">
+                    10:00:03.900 | CHECKPOINT |
+                    Credentials accepted by UI
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=3 | MODULE=AUTHENTICATION | ACTION=VERIFY_HOME_PAGE</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="log-entry INFO">
+                    10:00:04.100 | INFO |
+                    Dashboard loaded
+                </div>
+
+                <div class="log-entry CHECKPOINT">
+                    10:00:04.900 | CHECKPOINT |
+                    User successfully logged in
+                </div>
+
+                <div class="log-entry INFO">
+                    10:00:05.010 | INFO |
+                    pytest_runtest_teardown completed
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- TEST 2 -->
+
+    <div class="test-case FAIL">
+
+        <div class="test-header">
+            TEST FAILED :: test_login_invalid_password
+        </div>
+
+        <div class="metadata">
+            Module: tests.authentication.test_login<br>
+            Class: TestLogin<br>
+            Function: test_login_invalid_password<br>
+            Start Time: 2026-05-24 10:01:05
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=1 | MODULE=AUTHENTICATION | ACTION=OPEN_LOGIN_PAGE | USER=test_user</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="log-entry INFO">
+                    10:01:05.100 | INFO |
+                    Opening Login Page
+                </div>
+
+                <div class="log-entry INFO">
+                    10:01:05.800 | INFO |
+                    Login page loaded
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=2 | MODULE=AUTHENTICATION | ACTION=SUBMIT_INVALID_PASSWORD | EXPECTED=ERROR_MESSAGE</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="log-entry STEP">
+                    10:01:06.100 | STEP |
+                    Entering credentials
+                </div>
+
+                <div class="log-entry INFO">
+                    10:01:06.800 | INFO |
+                    Submitting login form
+                </div>
+
+                <div class="log-entry WARNING">
+                    10:01:07.200 | WARNING |
+                    Unexpected redirect detected
+                </div>
+
+                <div class="log-entry ERROR">
+                    10:01:07.500 | ERROR |
+                    Assertion failed
+                </div>
+            </div>
+        </div>
+
+
+        <div class="collapsible-banner">
+            <div class="banner-header" onclick="toggleBanner(this)">
+                <span>STEP=3 | MODULE=AUTHENTICATION | ACTION=ASSERT_ERROR_MESSAGE</span>
+                <span class="arrow">▶</span>
+            </div>
+
+            <div class="banner-content">
+                <div class="traceback">
+
+                    E AssertionError: Login error message mismatch
+
+                    Expected:
+                    "Invalid password"
+
+                    Actual:
+                    "Account temporarily locked"
+
+                    Location:
+                    tests/authentication/test_login.py:148
+
+                    SafeRepr:
+                    &lt;Response status=200 body='Account temporarily locked'&gt;
+
+                </div>
+
+                <div class="metadata">
+
+                    Captured Inspect Information:<br>
+                    File: tests/authentication/test_login.py<br>
+                    Function: test_login_invalid_password<br>
+                    Line Number: 148
+
+                </div>
+
+                <div class="log-entry DEBUG">
+                    10:01:08.001 | DEBUG |
+                    pytest_exception_interact invoked
+                </div>
+
+                <div class="log-entry DEBUG">
+                    10:01:08.100 | DEBUG |
+                    pytest_runtest_makereport generated failure report
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- RAW LOG SECTION -->
+
+    <div class="summary">
+
+        <h2>Captured Raw Logs</h2>
+
+        <pre>
+
+2026-05-24 10:00:01 [DEBUG] framework.runner
+pytest_runtest_setup
+
+2026-05-24 10:00:02 [STEP]
+Navigate to Login Page
+
+2026-05-24 10:00:03 [CHECKPOINT]
+Credentials accepted
+
+2026-05-24 10:01:07 [ERROR]
+AssertionError raised
+
+</pre>
+
+    </div>
+
+
+    <!-- PYTEST HOOKS -->
+
+    <div class="summary">
+
+        <h2>Pytest Hook Timeline</h2>
+
+        <table>
+
+            <tr>
+                <th>Timestamp</th>
+                <th>Hook</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>10:00:01</td>
+                <td>pytest_sessionstart</td>
+                <td>OK</td>
+            </tr>
+
+            <tr>
+                <td>10:00:01</td>
+                <td>pytest_runtest_setup</td>
+                <td>OK</td>
+            </tr>
+
+            <tr>
+                <td>10:00:02</td>
+                <td>pytest_runtest_call</td>
+                <td>OK</td>
+            </tr>
+
+            <tr>
+                <td>10:01:07</td>
+                <td>pytest_exception_interact</td>
+                <td>FAILURE</td>
+            </tr>
+
+            <tr>
+                <td>10:01:08</td>
+                <td>pytest_runtest_makereport</td>
+                <td>OK</td>
+            </tr>
+
+            <tr>
+                <td>10:01:10</td>
+                <td>pytest_sessionfinish</td>
+                <td>OK</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <script>
+        function toggleBanner(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+
+            content.classList.toggle('active');
+            arrow.classList.toggle('rotate');
+        }
+    </script>
+
+</body>
+
+</html>
+```
+
+## Features Added
+
+* Expand/collapse banners for each test step
+* Arrow rotation animation
+* Hover effects for better UX
+* Clean grouped logs under each step
+* Minimal JavaScript implementation
+* Existing logs preserved exactly as requested

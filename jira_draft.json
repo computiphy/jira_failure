@@ -1,0 +1,80 @@
+{
+    "title": "[AUTHENTICATION] Login error message mismatch — test_login_invalid_password",
+    "description": "Login error message assertion fails during invalid password test — the application returns 'Account temporarily locked' instead of the expected 'Invalid password' message.",
+    "priority": "Medium",
+    "component": "Authentication",
+    "labels": [
+        "auto-triaged",
+        "authentication",
+        "assertion-error"
+    ],
+    "environment": {
+        "firmware_version": "unknown",
+        "dut": "unknown",
+        "test_suite": "Regression Suite",
+        "os": "Python 3.12 / Windows 11"
+    },
+    "test_name": "test_login_invalid_password",
+    "module": "tests.authentication.test_login",
+    "class": "TestLogin",
+    "start_time": "2026-05-24 10:01:05",
+    "failure_step": 3,
+    "test_steps": [
+        {
+            "step": 1,
+            "action": "OPEN_LOGIN_PAGE",
+            "description": "Open the login page",
+            "status": "passed",
+            "banner_raw": "STEP=1 | MODULE=AUTHENTICATION | ACTION=OPEN_LOGIN_PAGE | USER=test_user"
+        },
+        {
+            "step": 2,
+            "action": "SUBMIT_INVALID_PASSWORD",
+            "description": "Submit login form with invalid password",
+            "status": "passed",
+            "banner_raw": "STEP=2 | MODULE=AUTHENTICATION | ACTION=SUBMIT_INVALID_PASSWORD | EXPECTED=ERROR_MESSAGE"
+        },
+        {
+            "step": 3,
+            "action": "ASSERT_ERROR_MESSAGE",
+            "description": "Verify error message displayed to user",
+            "status": "failed",
+            "banner_raw": "STEP=3 | MODULE=AUTHENTICATION | ACTION=ASSERT_ERROR_MESSAGE"
+        }
+    ],
+    "failure_details": {
+        "error_type": "AssertionError",
+        "error_message": "Login error message mismatch",
+        "expected": "Invalid password",
+        "actual": "Account temporarily locked",
+        "location": "tests/authentication/test_login.py:148",
+        "safe_repr": "<Response status=200 body='Account temporarily locked'>"
+    },
+    "log_evidence": [
+        {
+            "source": "inline (Step 2 — SUBMIT_INVALID_PASSWORD)",
+            "timestamp": "10:01:06.100",
+            "snippet": "10:01:06.100 | STEP | Entering credentials\n10:01:06.800 | INFO | Submitting login form\n10:01:07.200 | WARNING | Unexpected redirect detected\n10:01:07.500 | ERROR | Assertion failed"
+        },
+        {
+            "source": "inline (Step 3 — ASSERT_ERROR_MESSAGE)",
+            "timestamp": "10:01:08.001",
+            "snippet": "10:01:08.001 | DEBUG | pytest_exception_interact invoked\n10:01:08.100 | DEBUG | pytest_runtest_makereport generated failure report"
+        },
+        {
+            "source": "raw_logs",
+            "timestamp": "2026-05-24 10:01:07",
+            "snippet": "2026-05-24 10:01:07 [ERROR]\nAssertionError raised"
+        }
+    ],
+    "hook_timeline_failure": {
+        "timestamp": "10:01:07",
+        "hook": "pytest_exception_interact",
+        "status": "FAILURE"
+    },
+    "inspect_info": {
+        "file": "tests/authentication/test_login.py",
+        "function": "test_login_invalid_password",
+        "line_number": 148
+    }
+}

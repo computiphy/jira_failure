@@ -1,0 +1,27 @@
+# JIRA Failure Intelligence Pipeline Configuration
+
+jira:
+  project_key: "FW"
+  issue_type: "Bug"
+  default_priority: "Medium"
+  labels:
+    - "auto-triaged"
+    - "firmware"
+
+extraction:
+  # Maximum lines to include per log snippet
+  max_log_snippet_lines: 50
+  # Lines of context to include around an error match
+  context_lines_around_error: 20
+  # Log levels considered as failures (used to filter relevant log entries)
+  failure_log_levels:
+    - "ERROR"
+    - "WARNING"
+    - "CHECKPOINT"
+
+draft:
+  format: "markdown"
+  # Output files produced by the pipeline
+  output_files:
+    draft_md: "jira_draft.md"
+    draft_json: "jira_draft.json"
